@@ -454,7 +454,7 @@ export const getUserPurchaseInfo = async (userPurchase: PublicKey) => {
     };
 };
 
-export const getAllPurchases = async ({ buyer, ico }: { buyer?: PublicKey; ico?: PublicKey }) => {
-    const data = await findPurchases({ buyer, ico }, program);
+export const getAllPurchases = async ({ buyer, ico, refCode }: { buyer?: PublicKey; ico?: PublicKey, refCode?: string }) => {
+    const data = await findPurchases({ buyer, ico, refCode }, program);
     return data;
 };

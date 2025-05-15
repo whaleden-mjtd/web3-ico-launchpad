@@ -392,7 +392,7 @@ export const findPurchasesOld = async (
 };
 
 export const findPurchases = async (
-    { buyer, ico }: { buyer?: PublicKey; ico?: PublicKey },
+    { buyer, ico, refCode }: { buyer?: PublicKey; ico?: PublicKey, refCode?: string },
     program: anchor.Program<IcoLaunchpad>
 ) => {
     const allPurchases = await program.account.userPurchase.all();
@@ -401,6 +401,7 @@ export const findPurchases = async (
         .filter(({ account }) => {
             if (buyer && !account.buyer.equals(buyer)) return false;
             if (ico && !account.ico.equals(ico)) return false;
+            if (refCode && account.refCode !== refCode) return false;
             return true;
         })
         .map(({ publicKey, account }) => ({

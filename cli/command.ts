@@ -378,9 +378,10 @@ programCommand('user-purchase')
 programCommand('all-purchases')
   .option('-b, --buyer <string>', 'filter by buyer address')
   .option('-i, --ico <string>', 'filter by ico pot address')
+  .option('-c, --ref <string>', 'filter by ref code')
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   .action(async (directory, cmd) => {
-    const { env, keypair, rpc, buyer, ico } = cmd.opts();
+    const { env, keypair, rpc, buyer, ico, ref } = cmd.opts();
 
     console.log('Solana Cluster:', env);
     console.log('Keypair Path:', keypair);
@@ -392,6 +393,7 @@ programCommand('all-purchases')
       await getAllPurchases({
         buyer: buyer ? new PublicKey(buyer) : undefined,
         ico: ico ? new PublicKey(ico) : undefined,
+        refCode: ref ? ref : undefined,
       }),
       {
         depth: null,
@@ -437,24 +439,25 @@ yarn script user-status -a 4EjZ4sGnvfLbW89AAzSehob7Rmkym7vCH3SMcThSx9q1
 yarn script get-users
 yarn script status
 
+1000000000 = 1 mnt
+
 yarn ts-node init --keypair ./id.json --rpc http://127.0.0.1:8899
 yarn ts-node create-ico \
-  --keypair ./id.json   \
-  --rpc http://127.0.0.1:8899   \
-  --ico_mint BV3bvkBqVawTghH4uCaba3MGgYs63XyxwX9CeULwvmKG   \
-  --cost_mint BV3bvkBqVawTghH4uCaba3MGgYs63XyxwX9CeULwvmKG   \
-  --amount 1000000   \
-  --start_price 1   \
-  --end_price 100   \
-  --start_date 1746791919383   \
-  --end_date 1846791919383   \
-  --bonus_reserve 10000   \
-  --bonus_percentage 500   \
-  --bonus_activator 7500   \
-  --unlock_percentage 1000   \
-  --cliff_period 10 \
-  --vesting_percentage 500 \
-  --vesting_interval 604800 
+  --keypair ./keys/token/bos6p4wmxJDV4M7JbnRmnuaBEzMRE6WtBuQ54bWTReC.json   \
+  --ico_mint mntVWcSxSEyTyGc5uaoKmXpXtoKFytjM6mqm7CcgGes   \
+  --cost_mint Gh9ZwEmdLJ8DscKNTkTqPbNwLNNBjuSzaG9Vp2KGtKJr   \
+  --amount 1000000000   \
+  --start_price 1000000000   \
+  --end_price 0   \
+  --start_date 1747313516   \
+  --end_date 0   \
+  --bonus_reserve 0   \
+  --bonus_percentage 0   \
+  --bonus_activator 0   \
+  --unlock_percentage 0   \
+  --cliff_period 3153600000 \
+  --vesting_percentage 1 \
+  --vesting_interval 3153600000
 
 yarn ts-node buy-token \
   --keypair ./id.json   \
