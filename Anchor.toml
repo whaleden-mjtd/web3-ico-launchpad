@@ -11,12 +11,15 @@ ico_launchpad = "HXfrMHGx97CqoHidGSNcHvdn2GWcgdaVKkT6S42bMAhX"
 [programs.localnet]
 ico_launchpad = "HXfrMHGx97CqoHidGSNcHvdn2GWcgdaVKkT6S42bMAhX"
 
+[programs.mainnet]
+ico_launchpad = "HXfrMHGx97CqoHidGSNcHvdn2GWcgdaVKkT6S42bMAhX"
+
 [registry]
 url = "https://api.apr.dev"
 
 [provider]
-cluster = "Devnet"
-wallet = "./id.json"
+cluster = "devnet"
+wallet = "./whaR1roV859gNc3RCcdXqm24ZvghBWJtWa4smfHoaw4.json"
 
 [scripts]
 test = "anchor build && yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"

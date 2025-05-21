@@ -443,13 +443,13 @@ yarn script status
 
 yarn ts-node init --keypair ./id.json --rpc http://127.0.0.1:8899
 yarn ts-node create-ico \
-  --keypair ./keys/token/bos6p4wmxJDV4M7JbnRmnuaBEzMRE6WtBuQ54bWTReC.json   \
-  --ico_mint mntVWcSxSEyTyGc5uaoKmXpXtoKFytjM6mqm7CcgGes   \
+  --keypair ./keys/token6/bosw93hVoPiQApAksYR18q6ASTUw6dDm8ZNFXty6A16.json   \
+  --ico_mint mntQUJtVK6ELUy96Ghcjr6dvWshDYH7dKmpf3zPrm4B   \
   --cost_mint Gh9ZwEmdLJ8DscKNTkTqPbNwLNNBjuSzaG9Vp2KGtKJr   \
-  --amount 1000000000   \
-  --start_price 1000000000   \
+  --amount 1000000   \
+  --start_price 1000000000000   \
   --end_price 0   \
-  --start_date 1747313516   \
+  --start_date 1747658720   \
   --end_date 0   \
   --bonus_reserve 0   \
   --bonus_percentage 0   \
