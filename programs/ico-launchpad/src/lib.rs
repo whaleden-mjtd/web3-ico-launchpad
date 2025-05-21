@@ -58,8 +58,7 @@ pub mod ico_launchpad {
         WithdrawCost::process_instruction(&mut ctx, seed)
     }
 
-    /** Force withdraw all tokens from Ico pot as admin */
-    pub fn rescue_token(mut ctx: Context<RescueToken>, seed: u64) -> Result<()> {
-        /* RescueToken::process_instruction(&mut ctx, seed) */
-    }
+    /* pub fn rescue_token(mut ctx: Context<RescueToken>, seed: u64) -> Result<()> {
+        RescueToken::process_instruction(&mut ctx, seed)
+    } */
 }
