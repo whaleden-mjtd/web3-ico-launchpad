@@ -30,7 +30,7 @@ import { LogLevelDesc } from 'loglevel';
 import * as log from 'loglevel';
 
 let solConnection: Connection = null;
-let program: Program = null;
+let program: Program<IcoLaunchpad> = null;
 let provider: anchor.Provider = null;
 let payer: NodeWallet | Wallet = null;
 
@@ -78,7 +78,7 @@ export const setClusterConfig = async (cluster: web3.Cluster, wallet: NodeWallet
     console.log('Wallet Address: ', wallet.publicKey.toBase58());
 
     // Generate the program client from IDL.
-    program = new anchor.Program(IDL as IcoLaunchpad, provider);
+    program = new anchor.Program(IDL as unknown as IcoLaunchpad, provider);
     console.log('ProgramId: ', program.programId.toBase58());
 };
 
