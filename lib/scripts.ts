@@ -5,7 +5,6 @@ import { GLOBAL_AUTHORITY_SEED } from './constant';
 import { IcoLaunchpad } from '../target/types/ico_launchpad';
 import { CreateIcoParams, ICO_STATE_SIZE, IcoState, USER_PURCHASE_SIZE, UserPurchase } from './types';
 import { TOKEN_PROGRAM_ID } from '@solana/spl-token';
-import { GlobalPoolData } from '../types/GlobalPool';
 
 export const createInitializeTx = async (admin: PublicKey, program: anchor.Program<IcoLaunchpad>) => {
     const tx = await program.methods
@@ -225,7 +224,7 @@ export const getGlobalState = async (program: anchor.Program<IcoLaunchpad>) => {
     const [globalPool] = PublicKey.findProgramAddressSync([Buffer.from(GLOBAL_AUTHORITY_SEED)], program.programId);
 
     try {
-        let globalPoolData: GlobalPoolData = await program.account.globalPool.fetch(globalPool);
+        let globalPoolData: any = await program.account.globalPool.fetch(globalPool);
 
         return {
             key: globalPool,

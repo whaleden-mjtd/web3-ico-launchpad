@@ -30,7 +30,7 @@ import { LogLevelDesc } from 'loglevel';
 import * as log from 'loglevel';
 
 let solConnection: Connection = null;
-let program: Program<any> = null;
+let program: Program<IcoLaunchpad> = null;
 let provider: anchor.Provider = null;
 let payer: NodeWallet | Wallet = null;
 
