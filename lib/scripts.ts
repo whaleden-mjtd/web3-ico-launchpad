@@ -6,7 +6,6 @@ import { IcoLaunchpad } from '../target/types/ico_launchpad';
 import { CreateIcoParams, ICO_STATE_SIZE, IcoState, USER_PURCHASE_SIZE, UserPurchase } from './types';
 import { TOKEN_PROGRAM_ID } from '@solana/spl-token';
 import { GlobalPoolData } from '../types/GlobalPool';
-import { IcoItem } from '../types/Ico';
 
 export const createInitializeTx = async (admin: PublicKey, program: anchor.Program<IcoLaunchpad>) => {
     const tx = await program.methods
@@ -243,7 +242,7 @@ export const getGlobalState = async (program: anchor.Program<IcoLaunchpad>) => {
  */
 export const getIcoState = async (icoPot: PublicKey, program: anchor.Program<IcoLaunchpad>) => {
     try {
-        let icoStateData: IcoItem = await program.account.icoState.fetch(icoPot);
+        let icoStateData: IcoState = await program.account.icoState.fetch(icoPot);
 
         return {
             key: icoPot,
@@ -396,7 +395,7 @@ export const findPurchases = async (
     { buyer, ico, refCode }: { buyer?: PublicKey; ico?: PublicKey; refCode?: string },
     program: anchor.Program<IcoLaunchpad>
 ) => {
-    const allPurchases = await program.account.userPurchase.all();
+    const allPurchases: any = await program.account.userPurchase.all();
 
     const filtered = allPurchases
         .filter(({ account }) => {
