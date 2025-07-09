@@ -30,7 +30,7 @@ import { LogLevelDesc } from 'loglevel';
 import * as log from 'loglevel';
 
 let solConnection: Connection = null;
-let program: Program<IcoLaunchpad> = null;
+let program: Program<any> = null;
 let provider: anchor.Provider = null;
 let payer: NodeWallet | Wallet = null;
 
@@ -454,7 +454,15 @@ export const getUserPurchaseInfo = async (userPurchase: PublicKey) => {
     };
 };
 
-export const getAllPurchases = async ({ buyer, ico, refCode }: { buyer?: PublicKey; ico?: PublicKey, refCode?: string }) => {
+export const getAllPurchases = async ({
+    buyer,
+    ico,
+    refCode,
+}: {
+    buyer?: PublicKey;
+    ico?: PublicKey;
+    refCode?: string;
+}) => {
     const data = await findPurchases({ buyer, ico, refCode }, program);
     return data;
 };
