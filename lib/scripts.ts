@@ -6,7 +6,7 @@ import { IcoLaunchpad } from '../target/types/ico_launchpad';
 import { CreateIcoParams, ICO_STATE_SIZE, IcoState, USER_PURCHASE_SIZE, UserPurchase } from './types';
 import { TOKEN_PROGRAM_ID } from '@solana/spl-token';
 
-export const createInitializeTx = async (admin: PublicKey, program: anchor.Program<IcoLaunchpad>) => {
+export const createInitializeTx = async (admin: PublicKey, program: anchor.Program) => {
     const tx = await program.methods
         .initialize()
         .accounts({
@@ -20,11 +20,7 @@ export const createInitializeTx = async (admin: PublicKey, program: anchor.Progr
 /**
  * Change admin of the program as old admin
  */
-export const changeAdminTx = async (
-    admin: PublicKey,
-    newAdminAddr: PublicKey,
-    program: anchor.Program<IcoLaunchpad>
-) => {
+export const changeAdminTx = async (admin: PublicKey, newAdminAddr: PublicKey, program: anchor.Program) => {
     const tx = await program.methods
         .transferAdmin(newAdminAddr)
         .accounts({
@@ -38,11 +34,7 @@ export const changeAdminTx = async (
 /**
  * Change global config as admin
  */
-export const createChangeConfigTx = async (
-    admin: PublicKey,
-    paused: boolean,
-    program: anchor.Program<IcoLaunchpad>
-) => {
+export const createChangeConfigTx = async (admin: PublicKey, paused: boolean, program: anchor.Program) => {
     const tx = await program.methods
         .changeConfig(paused ? 1 : 0)
         .accounts({
@@ -61,7 +53,7 @@ export const createIcoTx = async (
     icoMint: PublicKey,
     costMint: PublicKey,
     inputParams: CreateIcoParams,
-    program: anchor.Program<IcoLaunchpad>,
+    program: anchor.Program,
     icoTokenProgram: PublicKey = TOKEN_PROGRAM_ID,
     costTokenProgram: PublicKey = TOKEN_PROGRAM_ID
 ) => {
@@ -85,7 +77,7 @@ export const createIcoTx = async (
 export const closeIcoTx = async (
     authority: PublicKey,
     icoPot: PublicKey,
-    program: anchor.Program<IcoLaunchpad>,
+    program: anchor.Program,
     tokenProgram: PublicKey = TOKEN_PROGRAM_ID
 ) => {
     const { data } = await getIcoState(icoPot, program);
@@ -109,7 +101,7 @@ export const buyTokenTx = async (
     icoPot: PublicKey,
     amount: string,
     refCode: string,
-    program: anchor.Program<IcoLaunchpad>,
+    program: anchor.Program,
     icoTokenProgram: PublicKey = TOKEN_PROGRAM_ID,
     costTokenProgram: PublicKey = TOKEN_PROGRAM_ID
 ) => {
@@ -137,7 +129,7 @@ export const claimTx = async (
     buyer: PublicKey,
     icoPot: PublicKey,
     userPurchase: PublicKey,
-    program: anchor.Program<IcoLaunchpad>,
+    program: anchor.Program,
     tokenProgram: PublicKey = TOKEN_PROGRAM_ID
 ) => {
     const icoData = await getIcoState(icoPot, program);
@@ -168,7 +160,7 @@ export const claimTx = async (
 export const withdrawCostTx = async (
     authority: PublicKey,
     icoPot: PublicKey,
-    program: anchor.Program<IcoLaunchpad>,
+    program: anchor.Program,
     tokenProgram: PublicKey = TOKEN_PROGRAM_ID
 ) => {
     const { data } = await getIcoState(icoPot, program);
@@ -194,7 +186,7 @@ export const withdrawCostTx = async (
 export const rescueTokenTx = async (
     admin: PublicKey,
     icoPot: PublicKey,
-    program: anchor.Program<IcoLaunchpad>,
+    program: anchor.Program,
     tokenProgram: PublicKey = TOKEN_PROGRAM_ID
 ) => {
     const { data } = await getIcoState(icoPot, program);
@@ -220,7 +212,7 @@ export const rescueTokenTx = async (
 /**
  * Fetch global pool PDA data
  */
-export const getGlobalState = async (program: anchor.Program<IcoLaunchpad>) => {
+export const getGlobalState = async (program: anchor.Program) => {
     const [globalPool] = PublicKey.findProgramAddressSync([Buffer.from(GLOBAL_AUTHORITY_SEED)], program.programId);
 
     try {
@@ -239,7 +231,7 @@ export const getGlobalState = async (program: anchor.Program<IcoLaunchpad>) => {
 /**
  * Fetch ICO state PDA data
  */
-export const getIcoState = async (icoPot: PublicKey, program: anchor.Program<IcoLaunchpad>) => {
+export const getIcoState = async (icoPot: PublicKey, program: anchor.Program) => {
     try {
         let icoStateData: IcoState = await program.account.icoState.fetch(icoPot);
 
@@ -255,7 +247,7 @@ export const getIcoState = async (icoPot: PublicKey, program: anchor.Program<Ico
 
 export const findAllICOs = async (
     { owner, icoMint, costMint }: { owner?: PublicKey; icoMint?: PublicKey; costMint?: PublicKey },
-    program: anchor.Program<IcoLaunchpad>
+    program: anchor.Program
 ) => {
     let filters: anchor.web3.GetProgramAccountsFilter[] = [
         {
@@ -327,7 +319,7 @@ export const findAllICOs = async (
 /**
  * Fetch user purchase PDA data
  */
-export const getUserPurchaseState = async (userPurchase: PublicKey, program: anchor.Program<IcoLaunchpad>) => {
+export const getUserPurchaseState = async (userPurchase: PublicKey, program: anchor.Program) => {
     try {
         let userPurchaseData = await program.account.userPurchase.fetch(userPurchase);
 
@@ -347,7 +339,7 @@ export const getUserPurchaseState = async (userPurchase: PublicKey, program: anc
 
 export const findPurchasesOld = async (
     { buyer, ico }: { buyer?: PublicKey; ico?: PublicKey },
-    program: anchor.Program<IcoLaunchpad>
+    program: anchor.Program
 ) => {
     let filters: anchor.web3.GetProgramAccountsFilter[] = [
         {
@@ -392,7 +384,7 @@ export const findPurchasesOld = async (
 
 export const findPurchases = async (
     { buyer, ico, refCode }: { buyer?: PublicKey; ico?: PublicKey; refCode?: string },
-    program: anchor.Program<IcoLaunchpad>
+    program: anchor.Program
 ) => {
     const allPurchases: any = await program.account.userPurchase.all();
 
