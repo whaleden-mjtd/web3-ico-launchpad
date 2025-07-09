@@ -78,7 +78,7 @@ export const setClusterConfig = async (cluster: web3.Cluster, wallet: NodeWallet
     console.log('Wallet Address: ', wallet.publicKey.toBase58());
 
     // Generate the program client from IDL.
-    program = new anchor.Program(IDL as unknown as IcoLaunchpad, provider);
+    program = new anchor.Program(IDL as IcoLaunchpad, provider);
     console.log('ProgramId: ', program.programId.toBase58());
 };
 
