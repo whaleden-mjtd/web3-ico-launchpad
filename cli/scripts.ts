@@ -188,6 +188,8 @@ export const createIco = async (
     });
 
     console.log('txHash: ', txId);
+
+    return txId;
 };
 
 export const createIcoWrapper = async (
