@@ -245,6 +245,8 @@ export const closeIco = async (
         });
 
         console.log('txHash: ', txId);
+
+        return txId;
     } catch (e) {
         console.log(e);
     }
