@@ -192,7 +192,7 @@ export const withdrawCostTx = async (
     return tx;
 };
 
-export const rescueTokenTx = async (
+/*export const rescueTokenTx = async (
     admin: PublicKey,
     icoPot: PublicKey,
     program: anchor.Program<IcoLaunchpad>,
@@ -216,7 +216,7 @@ export const rescueTokenTx = async (
     tx.add(txId);
 
     return tx;
-};
+};*/
 
 /**
  * Fetch global pool PDA data
