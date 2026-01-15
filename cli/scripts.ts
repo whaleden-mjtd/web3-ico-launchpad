@@ -1,4 +1,4 @@
-import { Program, Wallet, web3 } from '@coral-xyz/anchor';
+import { BorshInstructionCoder, Program, Wallet, web3} from '@coral-xyz/anchor';
 import * as anchor from '@coral-xyz/anchor';
 import fs from 'fs';
 import NodeWallet from '@coral-xyz/anchor/dist/cjs/nodewallet';
@@ -458,3 +458,9 @@ export const getAllPurchases = async ({ buyer, ico, refCode }: { buyer?: PublicK
     const data = await findPurchases({ buyer, ico, refCode }, program);
     return data;
 };
+
+export const decode = (data: string) => {
+    let coder = new BorshInstructionCoder(IDL as IcoLaunchpad);
+    let args = coder.decode(data, "base58");
+    return args;
+}
