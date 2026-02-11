@@ -1,22 +1,22 @@
 import { program } from 'commander';
 import { PublicKey } from '@solana/web3.js';
 import {
-  changeAdmin,
-  getGlobalInfo,
-  initProject,
-  setClusterConfig,
-  changeConfig,
-  createIco,
-  closeIco,
-  buyToken,
-  claim,
-  withdrawCost,
-  rescueToken,
-  getIcoInfo,
-  getAllICOs,
-  getUserPurchaseInfo,
-  getAllPurchases,
-  getCostInfo, loadWalletFromKeypair,
+    changeAdmin,
+    initProject,
+    setClusterConfig,
+    changeConfig,
+    createIco,
+    closeIco,
+    buyToken,
+    claim,
+    withdrawCost,
+    getIcoInfo,
+    getAllICOs,
+    getUserPurchaseInfo,
+    getAllPurchases,
+    getGlobalInfo,
+    getCostInfo,
+    loadWalletFromKeypair,
 } from './scripts';
 
 // program.version('0.0.1');
@@ -300,7 +300,7 @@ programCommand('withdraw-cost')
     await withdrawCost(new PublicKey(ico), !cost_is_token22 ? undefined : true);
   });
 
-programCommand('rescue-token')
+/*programCommand('rescue-token')
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   .requiredOption('-i, --ico <string>')
   .option(
@@ -317,7 +317,7 @@ programCommand('rescue-token')
     await setClusterConfig(env, loadWalletFromKeypair(keypair), rpc);
 
     await rescueToken(new PublicKey(ico), !ico_is_token22 ? undefined : true);
-  });
+  });*/
 
 programCommand('get-ico')
   .requiredOption('-i, --ico <string>')
@@ -443,13 +443,67 @@ yarn script status
 
 yarn ts-node init --keypair ./id.json --rpc http://127.0.0.1:8899
 yarn ts-node create-ico \
-  --keypair ./keys/token/bos6p4wmxJDV4M7JbnRmnuaBEzMRE6WtBuQ54bWTReC.json   \
-  --ico_mint mntVWcSxSEyTyGc5uaoKmXpXtoKFytjM6mqm7CcgGes   \
+  --keypair ./keys/token6/bosw93hVoPiQApAksYR18q6ASTUw6dDm8ZNFXty6A16.json   \
+  --ico_mint mntQUJtVK6ELUy96Ghcjr6dvWshDYH7dKmpf3zPrm4B   \
   --cost_mint Gh9ZwEmdLJ8DscKNTkTqPbNwLNNBjuSzaG9Vp2KGtKJr   \
-  --amount 1000000000   \
-  --start_price 1000000000   \
+  --amount 1000000   \
+  --start_price 1000000000000   \
   --end_price 0   \
-  --start_date 1747313516   \
+  --start_date 1747658720   \
+  --end_date 0   \
+  --bonus_reserve 0   \
+  --bonus_percentage 0   \
+  --bonus_activator 0   \
+  --unlock_percentage 0   \
+  --cliff_period 3153600000 \
+  --vesting_percentage 1 \
+  --vesting_interval 3153600000
+
+//// DIGITAL EDITION ICO
+yarn ts-node create-ico \
+  --env mainnet-beta   \
+  --keypair ./whaR1roV859gNc3RCcdXqm24ZvghBWJtWa4smfHoaw4.json   \
+  --ico_mint AJDDsL6hHwVJ4CzzdKN1PvTcugjagRynLNLDSs9j4qkU   \
+  --cost_mint EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v   \
+  --amount 1000000   \
+  --start_price 4000000000000   \
+  --end_price 0   \
+  --start_date 1747658720   \
+  --end_date 0   \
+  --bonus_reserve 0   \
+  --bonus_percentage 0   \
+  --bonus_activator 0   \
+  --unlock_percentage 0   \
+  --cliff_period 3153600000 \
+  --vesting_percentage 1 \
+  --vesting_interval 3153600000
+
+yarn ts-node create-ico \
+  --keypair ./keys/token6/bosw93hVoPiQApAksYR18q6ASTUw6dDm8ZNFXty6A16.json   \
+  --ico_mint mntQUJtVK6ELUy96Ghcjr6dvWshDYH7dKmpf3zPrm4B   \
+  --cost_mint Gh9ZwEmdLJ8DscKNTkTqPbNwLNNBjuSzaG9Vp2KGtKJr   \
+  --amount 1000000   \
+  --start_price 4000000000000   \
+  --end_price 0   \
+  --start_date 1747658720   \
+  --end_date 0   \
+  --bonus_reserve 0   \
+  --bonus_percentage 0   \
+  --bonus_activator 0   \
+  --unlock_percentage 0   \
+  --cliff_period 3153600000 \
+  --vesting_percentage 1 \
+  --vesting_interval 3153600000
+
+yarn ts-node create-ico \
+  --env mainnet-beta   \
+  --keypair ./whaR1roV859gNc3RCcdXqm24ZvghBWJtWa4smfHoaw4.json   \
+  --ico_mint AJDDsL6hHwVJ4CzzdKN1PvTcugjagRynLNLDSs9j4qkU   \
+  --cost_mint EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v   \
+  --amount 1000000   \
+  --start_price 1000000000000   \
+  --end_price 0   \
+  --start_date 1747658720   \
   --end_date 0   \
   --bonus_reserve 0   \
   --bonus_percentage 0   \

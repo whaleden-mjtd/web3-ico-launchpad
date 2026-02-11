@@ -1,4 +1,4 @@
-import { Program, Wallet, web3 } from '@coral-xyz/anchor';
+import { BorshInstructionCoder, Program, Wallet, web3} from '@coral-xyz/anchor';
 import * as anchor from '@coral-xyz/anchor';
 import fs from 'fs';
 import NodeWallet from '@coral-xyz/anchor/dist/cjs/nodewallet';
@@ -20,7 +20,6 @@ import {
     getUnlocked,
     getUserPurchaseState,
     getValue,
-    rescueTokenTx,
     withdrawCostTx,
 } from '../lib/scripts';
 import { IcoLaunchpad } from '../target/types/ico_launchpad';
@@ -344,7 +343,7 @@ export const withdrawCost = async (
     console.log('txHash: ', txId);
 };
 
-export const rescueToken = async (
+/*export const rescueToken = async (
     icoPot: PublicKey,
     icoIsToken22: boolean = false // need true if token is spl 2022
 ) => {
@@ -360,7 +359,7 @@ export const rescueToken = async (
     });
 
     console.log('txHash: ', txId);
-};
+};*/
 
 export const getGlobalInfo = async () => {
     const { data, key } = await getGlobalState(program);
@@ -468,3 +467,9 @@ export const getAllPurchases = async ({
     const data = await findPurchases({ buyer, ico, refCode }, program);
     return data;
 };
+
+export const decode = (data: string) => {
+    let coder = new BorshInstructionCoder(IDL as IcoLaunchpad);
+    let args = coder.decode(data, "base58");
+    return args;
+}
